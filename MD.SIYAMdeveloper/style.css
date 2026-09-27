@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #03030c;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* কাস্টম কার্সার */
+@media (min-width: 768px) {
+    body {
+        cursor: default;
+    }
+
+    .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #00f2fe;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .cursor-outline {
+        width: 35px;
+        height: 35px;
+        border: 2px solid rgba(0, 242, 254, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9998;
+        pointer-events: none;
+        transition: transform 0.1s ease-out;
+    }
+}
+
+@media (max-width: 767px) {
+    .cursor-dot, .cursor-outline {
+        display: none;
+    }
+}
+
+/* পার্টিকেল ক্যানভাস */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* নেভিগেশন বার */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%;
+    background: rgba(3, 3, 12, 0.85);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00f2fe;
+    margin-right: 12px;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+}
+
+.neon-dot {
+    color: #4facfe;
+    text-shadow: 0 0 10px #4facfe;
+}
+
+/* হিরো সেকশন */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    padding-top: 100px;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.hero-content {
+    max-width: 550px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    border-radius: 20px;
+    color: #00f2fe;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.hero-content h1 {
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.glow-text {
+    background: linear-gradient(45deg, #00f2fe, #4facfe, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.typing-container {
+    font-size: 24px;
+    margin: 15px 0;
+    color: #d0d0f0;
+}
+
+.typing-text {
+    color: #00f2fe;
+    border-right: 2px solid #00f2fe;
+}
+
+/* বাটনস */
+.btn-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 14px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.primary-btn {
+    background: linear-gradient(45deg, #00f2fe, #4facfe);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    border: none;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
+    transform: translateY(-2px);
+}
+
+/* ৩ডি কিউব অ্যানিমেশন (GPU Accelerated) */
+.hero-3d-box {
+    margin: 0 auto;
+    will-change: transform;
+}
+
+.cube-container {
+    width: 200px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 16s infinite linear;
+    will-change: transform;
+}
+
+.face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(3, 3, 12, 0.8);
+    border: 2px solid #00f2fe;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #00f2fe;
+}
+
+.front  { transform: rotateY(0deg) translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+@keyframes rotateCube {
+    from { transform: rotateX(0deg) rotateY(0deg); }
+    to { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* সেকশনস ও গ্রিড */
+.section {
+    padding: 70px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 45px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.skill-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 30px;
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 242, 254, 0.5);
+    box-shadow: 0 5px 20px rgba(0, 242, 254, 0.15);
+}
+
+.icon-box {
+    font-size: 38px;
+    color: #00f2fe;
+    margin-bottom: 15px;
+}
+
+.feature-card {
+    background: rgba(0, 242, 254, 0.02);
+}
+
+/* কন্টাক্ট ফরম */
+.contact-card {
+    max-width: 550px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 35px;
+    text-align: center;
+}
+
+.contact-sub {
+    font-size: 14px;
+    color: #a0a0c0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.contact-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-card input, .contact-card textarea {
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    outline: none;
+    font-family: inherit;
+}
+
+.contact-card input:focus, .contact-card textarea:focus {
+    border-color: #00f2fe;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 36px;
+    }
+}
